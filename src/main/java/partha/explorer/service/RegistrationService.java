@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import partha.explorer.utils.Constants;
+import partha.explorer.manager.RegistrationManager;
+import static partha.explorer.manager.RegistrationManager.checkDuplicate;
+import partha.explorer.utils.ApplicationConstant;
 
 /**
  *
@@ -15,25 +17,28 @@ import partha.explorer.utils.Constants;
  */
 public class RegistrationService extends HttpServlet {
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String loginid = request.getParameter("loginid");
+            String userMap = request.getParameter("userMap");
+            String userName = request.getParameter("userName");
 
-            boolean status = true;
-            if (status) {
-                out.write(new Gson().toJson(Constants.HTTP_STATUS_SUCCESS));
+            if (checkDuplicate(userName)) {
+                String id = new RegistrationManager().firstRegister(userMap);
+
+                if (id != null && !id.equals("")) {
+                    out.write(new Gson().toJson(id));
+                } else {
+                    out.write(new Gson().toJson(ApplicationConstant.HTTP_STATUS_FAIL));
+                }
             } else {
-
-                out.write(new Gson().toJson(Constants.HTTP_STATUS_FAIL));
-
+                out.write(new Gson().toJson("User Name Already exists"));
             }
 
         } catch (Exception ex) {
-            out.write(new Gson().toJson(Constants.ERROR));
+            out.write(new Gson().toJson(ApplicationConstant.ERROR));
         }
     }
 

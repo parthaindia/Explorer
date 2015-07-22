@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.UUID;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import partha.explorer.dto.FileHolder;
-import partha.explorer.utils.Constants;
+import partha.explorer.utils.ApplicationConstant;
 
 
 /**
@@ -43,7 +43,7 @@ public class FileManager {
             return null;
         } else {
             //Set the table name from Config 
-            String tableName = Constants.FILE_TABLE;
+            String tableName = ApplicationConstant.FILE_TABLE;
 
             Type type = new TypeToken<FileHolder>() {
             }.getType();
@@ -62,7 +62,7 @@ public class FileManager {
                 String fileName = inputFileName.replace("." + extension, "");
                 String ouputFileName = fileName + "@" + UUID.randomUUID().toString();
 
-                String dest = Constants.FILE_PATH + "/" + ouputFileName + "." + extension;
+                String dest = ApplicationConstant.FILE_PATH + "/" + ouputFileName + "." + extension;
                 //set the new file name to the FileHolder object
                 fileData.setFileName(ouputFileName);
                 fileData.setFileExt(extension);
@@ -100,7 +100,7 @@ public class FileManager {
                 id = (String) fileData.getId();
                 //change the update time
 
-                String table = Constants.FILE_TABLE;
+                String table = ApplicationConstant.FILE_TABLE;
                 String result = DBManager.getDB().getByKey(table, id);
                 if (result != null && !result.isEmpty()) {
                     Type type2 = new TypeToken<List<FileHolder>>() {
@@ -151,7 +151,7 @@ public class FileManager {
     public String fetchallUserFiles(String loginid) throws Exception {
         Map params = new HashMap();
         params.put("OwnerID", loginid);
-        String json = DBManager.getDB().getByCondition(Constants.FILE_TABLE, params);
+        String json = DBManager.getDB().getByCondition(ApplicationConstant.FILE_TABLE, params);
         ArrayList retList = new ArrayList();
         if (json != null && !json.isEmpty()) {
             Type type = new TypeToken<List<FileHolder>>() {
@@ -177,7 +177,7 @@ public class FileManager {
         if (fileHolderId == null || fileHolderId.equals("")) {
             return null;
         } else {
-            String table = Constants.FILE_TABLE;
+            String table = ApplicationConstant.FILE_TABLE;
             String result = DBManager.getDB().getByKey(table, fileHolderId);
             if (result != null && !result.isEmpty()) {
                 Type type = new TypeToken<List<FileHolder>>() {
@@ -203,7 +203,7 @@ public class FileManager {
 
     public static void readCsv() throws Exception {
 
-        String csvFile = Constants.CSV_PATH;
+        String csvFile = ApplicationConstant.CSV_PATH;
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";

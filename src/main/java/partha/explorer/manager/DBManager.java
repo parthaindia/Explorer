@@ -1,7 +1,7 @@
 package partha.explorer.manager;
 
 
-import partha.explorer.utils.Constants;
+import partha.explorer.utils.ApplicationConstant;
 import partha.mongodb.manager.DBpublicConnector;
 import partha.mongodb.manager.MongoInterface;
 
@@ -12,9 +12,9 @@ import partha.mongodb.manager.MongoInterface;
 public class DBManager {
 
     public static MongoInterface getDB() throws Exception {
-        String schema = Constants.DBSCHEMA;
-        String dbUrl = Constants.DBURL;
-        Integer dbPort = Integer.parseInt(Constants.DBPORT);
+        String schema = ApplicationConstant.DBSCHEMA;
+        String dbUrl = ApplicationConstant.DBURL;
+        Integer dbPort = Integer.parseInt(ApplicationConstant.DBPORT);
         MongoInterface db = new DBpublicConnector().getConnection(schema, dbUrl, dbPort);
         return db;
     }

@@ -9,7 +9,7 @@ package partha.explorer.utils;
  *
  * @author Partha
  */
-public interface Constants {
+public interface ApplicationConstant {
 
     public static final String SUCCESS = "success";
     public static final String FAIL = "fail";
