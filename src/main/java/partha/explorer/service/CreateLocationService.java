@@ -1,58 +1,51 @@
+
 package partha.explorer.service;
 
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import partha.explorer.manager.RegistrationManager;
-import static partha.explorer.manager.RegistrationManager.checkDuplicate;
+import partha.explorer.manager.FourSquareQuery;
 import partha.explorer.utils.ApplicationConstant;
 
 /**
  *
  * @author Partha
  */
-public class RegistrationService extends HttpServlet {
+public class CreateLocationService extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            //    String userMap = request.getParameter("userMap");
-            String emailId = request.getParameter("emailId");
-            String gcmId = request.getParameter("gcmId");
-            String userName = request.getParameter("userName");
-//                  String gcmId="29029023";
-//            String userName = "nivedha";
-//              String emailId="nivedha175@gmail.com";
+            String loginid = request.getParameter("loginid");
+            String code = request.getParameter("code");
 
-            Map userMap = new HashMap();
-            userMap.put("emailId", emailId);
-            userMap.put("gcmId", gcmId);
-            userMap.put("userName", userName);
-            String userJson = new Gson().toJson(userMap);
-
-            if (!checkDuplicate(userName)) {
-                String id = new RegistrationManager().firstRegister(userJson);
-                Map resultMap = new HashMap();
-                resultMap.put("userId", id);
-                if (id != null && !id.equals("")) {
-                    out.write(new Gson().toJson(resultMap));
-                } else {
-                    out.write(new Gson().toJson(ApplicationConstant.HTTP_STATUS_FAIL));
-                }
-            } else {
-                out.write(new Gson().toJson("User Name Already exists"));
+            //    String latitude = request.getParameter("latitude");//12.9797° N, 77.5907° E
+            String latitude = "12.9797";
+            //    String longitude = request.getParameter("longitude");//HougjGKsd6mshiXvuUCRCD0MyhR8p1waKoljsnnMvb8IRLE07A
+            String longitude = "77.5907";
+            //    String search_query = request.getParameter("search_query");
+            String search_query = "puncher shop";
+            List<HashMap> output = new FourSquareQuery().userInfoQuery(latitude, longitude, search_query);
+            if (output != null && !output.isEmpty()) {
+                out.write(new Gson().toJson(output));
             }
 
         } catch (Exception ex) {
+            request.setAttribute("statuscode", ApplicationConstant.HTTP_STATUS_EXCEPTION);
             out.write(new Gson().toJson(ApplicationConstant.HTTP_STATUS_EXCEPTION));
+            StringWriter stack = new StringWriter();
+            ex.printStackTrace(new PrintWriter(stack));
+        } finally {
+            out.close();
         }
     }
 

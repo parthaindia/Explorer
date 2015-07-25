@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class Route {
 
+    private Object _id;
     private List<Location> locationList;
     private String name;
     private String type;
@@ -19,12 +20,16 @@ public class Route {
     private List<Location> meetupPoint;
     private Location destinationLocation;
     private List<String> routeBlogData;
-    private List<String>userGroupIds;
+    private List<String> userIds;
     private boolean isShareOnline;
     private String requirements;
     private String planningData;
-    private List<Request>routeRequests;
+    private List<Request> routeRequests;
     private Uprouting routeUproute;
+    private String status;
+    private String createdate;
+    private String updatedate;
+ 
 
     public List<Location> getLocationList() {
         return locationList;
@@ -114,13 +119,6 @@ public class Route {
         this.routeBlogData = routeBlogData;
     }
 
-    public List<String> getUserGroupIds() {
-        return userGroupIds;
-    }
-
-    public void setUserGroupIds(List<String> userGroupIds) {
-        this.userGroupIds = userGroupIds;
-    }
 
     public boolean isIsShareOnline() {
         return isShareOnline;
@@ -153,10 +151,10 @@ public class Route {
     public void setRouteRequests(List<Request> routeRequests) {
         this.routeRequests = routeRequests;
     }
-    
+
     @Override
     public String toString() {
-        return "Route{" + "locationList=" + locationList + ", name=" + name + ", type=" + type + ", subtype=" + subtype + ", rating=" + rating + ", reviews=" + reviews + ", valueForMoney=" + valueForMoney + ", startLocation=" + startLocation + ", meetupPoint=" + meetupPoint + ", destinationLocation=" + destinationLocation + ", routeBlogData=" + routeBlogData + ", userGroupIds=" + userGroupIds + ", isShareOnline=" + isShareOnline + ", requirements=" + requirements + ", planningData=" + planningData + ", routeRequests=" + routeRequests + '}';
+        return "Route{" + "locationList=" + locationList + ", name=" + name + ", type=" + type + ", subtype=" + subtype + ", rating=" + rating + ", reviews=" + reviews + ", valueForMoney=" + valueForMoney + ", startLocation=" + startLocation + ", meetupPoint=" + meetupPoint + ", destinationLocation=" + destinationLocation + ", routeBlogData=" + routeBlogData + ", userIds=" + userIds + ", isShareOnline=" + isShareOnline + ", requirements=" + requirements + ", planningData=" + planningData + ", routeRequests=" + routeRequests + '}';
     }
 
     public Uprouting getRouteUproute() {
@@ -166,5 +164,54 @@ public class Route {
     public void setRouteUproute(Uprouting routeUproute) {
         this.routeUproute = routeUproute;
     }
-    
+
+    public String getPlanningData() {
+        return planningData;
+    }
+
+    public void setPlanningData(String planningData) {
+        this.planningData = planningData;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public String getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(String updatedate) {
+        this.updatedate = updatedate;
+    }
+
+    public List<String> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(List<String> userIds) {
+        this.userIds = userIds;
+    }
+
+    public Object getId() {
+        return _id;
+    }
+
+    public void setId(Object _id) {
+        this._id = _id;
+    }
+
+
 }

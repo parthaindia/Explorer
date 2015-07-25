@@ -1,62 +1,55 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package partha.explorer.service;
 
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.StringWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import partha.explorer.manager.RegistrationManager;
-import static partha.explorer.manager.RegistrationManager.checkDuplicate;
+import partha.explorer.dto.Blog;
+import partha.explorer.manager.BlogManager;
 import partha.explorer.utils.ApplicationConstant;
 
 /**
  *
- * @author Partha
+ * @author shravanigv
  */
-public class RegistrationService extends HttpServlet {
+public class BlogIdSpecificService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            //    String userMap = request.getParameter("userMap");
-            String emailId = request.getParameter("emailId");
-            String gcmId = request.getParameter("gcmId");
-            String userName = request.getParameter("userName");
-//                  String gcmId="29029023";
-//            String userName = "nivedha";
-//              String emailId="nivedha175@gmail.com";
 
-            Map userMap = new HashMap();
-            userMap.put("emailId", emailId);
-            userMap.put("gcmId", gcmId);
-            userMap.put("userName", userName);
-            String userJson = new Gson().toJson(userMap);
-
-            if (!checkDuplicate(userName)) {
-                String id = new RegistrationManager().firstRegister(userJson);
-                Map resultMap = new HashMap();
-                resultMap.put("userId", id);
-                if (id != null && !id.equals("")) {
-                    out.write(new Gson().toJson(resultMap));
-                } else {
-                    out.write(new Gson().toJson(ApplicationConstant.HTTP_STATUS_FAIL));
-                }
+            String blogId = request.getParameter("blogId");
+            Blog output =  new BlogManager().getBlog(blogId);
+            if (output != null) {
+                out.write(new Gson().toJson(output));
             } else {
-                out.write(new Gson().toJson("User Name Already exists"));
+                out.write(new Gson().toJson(ApplicationConstant.HTTP_STATUS_FAIL));
             }
 
         } catch (Exception ex) {
+            request.setAttribute("statuscode", ApplicationConstant.HTTP_STATUS_EXCEPTION);
             out.write(new Gson().toJson(ApplicationConstant.HTTP_STATUS_EXCEPTION));
+            StringWriter stack = new StringWriter();
+            ex.printStackTrace(new PrintWriter(stack));
+        } finally {
+            out.close();
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

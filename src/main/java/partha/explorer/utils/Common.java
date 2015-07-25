@@ -1,6 +1,5 @@
 package partha.explorer.utils;
 
-
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,13 +8,11 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Partha
  */
 public class Common {
-
 
     public static Map<String, String> getSingleMapValue(Map<String, String[]> map) {
 
@@ -52,5 +49,20 @@ public class Common {
         return dtoObject;
     }
 
+    public static Map<String, Object> ConvertObjectToMap(Object obj) throws
+            Exception {
+        Class<?> pomclass = obj.getClass();
+        pomclass = obj.getClass();
+        Method[] methods = obj.getClass().getMethods();
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (Method m : methods) {
+            if (m.getName().startsWith("get") && !m.getName().startsWith("getClass")) {
+                Object value = (Object) m.invoke(obj);
+                map.put(m.getName().substring(3), (Object) value);
+            }
+        }
+        return map;
+    }
 
 }

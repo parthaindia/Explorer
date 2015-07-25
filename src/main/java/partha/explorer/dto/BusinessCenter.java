@@ -16,4 +16,8 @@ public class BusinessCenter {
     String reviews;
     String valueForMoney;
     List<String>Others;
+       
+    private String status;
+     private String createdate;
+    private String updatedate;
 }

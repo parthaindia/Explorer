@@ -1,41 +1,26 @@
-
 package partha.explorer.dto;
+
+import java.util.List;
 
 /**
  *
  * @author Partha
  */
-public class Badges {
+public class Blog {
+
+    private Object _id;
+    private List<String> blogInfo;
     private String name;
-    private String message;
-    private String value;
-       
     private String status;
-     private String createdate;
+    private String createdate;
     private String updatedate;
 
-    public String getName() {
-        return name;
+    public List<String> getBlogInfo() {
+        return blogInfo;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setBlogInfo(List<String> blogInfo) {
+        this.blogInfo = blogInfo;
     }
 
     public String getStatus() {
@@ -61,5 +46,21 @@ public class Badges {
     public void setUpdatedate(String updatedate) {
         this.updatedate = updatedate;
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Object getId() {
+        return _id;
+    }
+
+    public void setId(Object _id) {
+        this._id = _id;
+    }
+
 }
