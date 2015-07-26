@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class Request {
 
-    Object _id;
+    private Object _id;
     private String requestTo;
     private Map requestFrom;
     private String requestMessage;
@@ -75,6 +75,14 @@ public class Request {
 
     public void setReqFlag(Boolean reqFlag) {
         this.reqFlag = reqFlag;
+    }
+
+    public Object getId() {
+        return _id;
+    }
+
+    public void setId(Object _id) {
+        this._id = _id;
     }
 
 }

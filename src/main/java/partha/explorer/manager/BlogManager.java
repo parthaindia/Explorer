@@ -23,6 +23,7 @@ public class BlogManager {
 
         Blog bl = new Blog();
         bl.setName("Hogenakkal_Falls");
+        bl.setUrl("http://howyoudoin.files.wordpress.com/2007/12/p1040139.jpg");
         ArrayList ar = new ArrayList();
         ar.add("Hogenakkal Falls or Hogenakal Falls is a waterfall in South India on the river Kaveri. It is located in the Dharmapuri district of the southern Indian state of Tamil Nadu, about 180 km (110 mi) from Bangalore and 46 km (29 mi) from Dharmapuri town.[7] It is sometimes referred to as the \"Niagara of India\". With its fame for medicinal baths and hide boat rides, it is a major tourist attraction. Carbonatite rocks in this site are considered to be the oldest of its kind in South Asia and one of the oldest in the world.[8] This is also the site of a proposed project to generate drinking water.");
         ar.add("http://howyoudoin.files.wordpress.com/2007/12/p1040139.jpg");
@@ -39,6 +40,7 @@ public class BlogManager {
 
         Blog nan = new Blog();
         nan.setName("Nandi hills");
+        nan.setUrl("http://www.couponraja.in/theroyale/wp-content/uploads/2014/10/Nandi-Hills.jpg");
         ar = new ArrayList();
         ar.add("Nandi hills is a popular hangout for Bangalooreans. It is a hill 1478m above sea level. The attractions here include a garden maintained by Horticultural department, Tipu's drop from where Tipu used to kill his prisoners and a temple with a thousand year old nandi statue. On the way to the hills there are sunflower gardens and wine yards.");
         ar.add("http://www.team-bhp.com/forum/attachments/travelogues/253018d1262068176-nandi-hills-early-morning-drive-dsc03703.jpg");
@@ -69,6 +71,7 @@ public class BlogManager {
 
         Blog shiv = new Blog();
         shiv.setName("Shivagange");
+        shiv.setUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Shivagange_Basavanna_1.JPG/1024px-Shivagange_Basavanna_1.JPG");
         ar = new ArrayList();
         ar.add("Shivagange is a mountain peak with a height of 1368 meters[1] and Hindu pilgrimage center located near Dobbaspet, in Bangalore Rural district India. It is situated 8 km from the town of Tumkur and 54 km from Bangalore.");
         ar.add("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Shivagange_From_Foot_Hills.JPG/1024px-Shivagange_From_Foot_Hills.JPG");
@@ -84,6 +87,7 @@ public class BlogManager {
 
         Blog ran = new Blog();
         ran.setName("Rangaswamy betta");
+        ran.setUrl("https://upload.wikimedia.org/wikipedia/en/thumb/b/b3/Bilikal_Rangaswamy_Temple.png/1024px-Bilikal_Rangaswamy_Temple.png");
         ar = new ArrayList();
         ar.add("The trek does not seem to last for an hour but behind the first there was a surprise of bigger betta (Hill in Kannada) and that was Rangaswamy betta. A thick forest full of shurbs; 70 Kms south of Bangalore city; Haven of elephants and thick plantations; A rock temple dedicated to lord Ranganathaswamy at the summit; If you ask me honestly then its an easy trek but thick and prickly shrubs add more adventure to it.");
         ar.add("http://i2.wp.com/trekkerpedia.com/wp-content/uploads/2013/07/Bilakal-forest-from-rangaswamy-betta-peak.jpg?resize=500%2C375");
@@ -113,5 +117,21 @@ public class BlogManager {
         List<Blog> blList = new Gson().fromJson(blogJson, new TypeToken<List<Blog>>() {
         }.getType());
         return blList.get(0);
+    }
+
+    public List<Blog> blogsearchQuery(String blogId) throws Exception {
+        if (blogId == null || blogId.equals("")) {
+            return null;
+        }
+
+        ArrayList resultList = new ArrayList();
+        List<Blog> ret = new BlogManager().getAllBlogs();
+        for (Blog bl : ret) {
+            if (bl.getName().contains(blogId)) {
+                resultList.add(bl);
+            }
+        }
+        return resultList;
+
     }
 }

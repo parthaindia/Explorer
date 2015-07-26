@@ -12,6 +12,7 @@ public class Blog {
     private List<String> blogInfo;
     private String name;
     private String status;
+    private String url;
     private String createdate;
     private String updatedate;
 
@@ -61,6 +62,14 @@ public class Blog {
 
     public void setId(Object _id) {
         this._id = _id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

@@ -5,10 +5,6 @@
         <servlet-class>partha.explorer.service.RegistrationService</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>partha.explorer.service.NewServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SearchQueryService</servlet-name>
         <servlet-class>partha.explorer.service.SearchQueryService</servlet-class>
     </servlet>
@@ -56,13 +52,13 @@
         <servlet-name>BlogIdSpecificService</servlet-name>
         <servlet-class>partha.explorer.service.BlogIdSpecificService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogSearchService</servlet-name>
+        <servlet-class>partha.explorer.service.BlogSearchService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationService</servlet-name>
         <url-pattern>/Registration</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchQueryService</servlet-name>
@@ -111,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>BlogIdSpecificService</servlet-name>
         <url-pattern>/BlogIdSpecific</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogSearchService</servlet-name>
+        <url-pattern>/BlogSearch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

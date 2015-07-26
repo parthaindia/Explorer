@@ -136,4 +136,12 @@ public class User {
         this.updatedate = updatedate;
     }
 
+    public void setId(Object _id) {
+        this._id = _id;
+    }
+
+    public Object getId() {
+        return _id;
+    }
+
 }
