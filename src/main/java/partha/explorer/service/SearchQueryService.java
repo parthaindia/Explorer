@@ -32,12 +32,12 @@ public class SearchQueryService extends HttpServlet {
             String loginid = request.getParameter("loginid");
             String code = request.getParameter("code");
 
-            //    String latitude = request.getParameter("latitude");//12.9797° N, 77.5907° E
-            String latitude = "12.9797";
-            //    String longitude = request.getParameter("longitude");//HougjGKsd6mshiXvuUCRCD0MyhR8p1waKoljsnnMvb8IRLE07A
-            String longitude = "77.5907";
-            //    String search_query = request.getParameter("search_query");
-            String search_query = "puncher shop";
+                String latitude = request.getParameter("latitude");//12.9797° N, 77.5907° E
+            //String latitude = "12.9797";
+                String longitude = request.getParameter("longitude");//HougjGKsd6mshiXvuUCRCD0MyhR8p1waKoljsnnMvb8IRLE07A
+            //String longitude = "77.5907";
+                String search_query = request.getParameter("search_query");
+            //String search_query = "puncher shop";
             List<HashMap> output = new FourSquareQuery().userInfoQuery(latitude, longitude, search_query);
             if (output != null && !output.isEmpty()) {
                 out.write(new Gson().toJson(output));
